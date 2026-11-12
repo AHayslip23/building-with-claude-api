@@ -47,7 +47,8 @@ My notebooks and exercises from Anthropic's [**Claude with the Anthropic API**](
 ### 05 · RAG and Agentic Search *(in progress)*
 | Notebook | Lesson |
 |---|---|
-| `01_text_chunking.ipynb` | Text chunking strategies (by character, sentence and section) |
+| `01_text_chunking_and_embeddings.ipynb` | Text chunking strategies (by character, sentence and section), text embeddings with Voyage AI, and a vector index |
+| `02_vector_database.ipynb` | The full RAG flow: chunk, embed and store sections in a vector index, then search it |
 
 `report.md` is the sample document used for chunking, and `VoyageAI_API_Key_Directions.pdf` covers setting up a Voyage AI key for embeddings.
 
