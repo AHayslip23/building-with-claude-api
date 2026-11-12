@@ -1,0 +1,17 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Jupyter / Python clutter
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+Untitled*.ipynb
+
+# Text editor tool backups
+.backups/
+
+# OS
+.DS_Store
+Thumbs.db

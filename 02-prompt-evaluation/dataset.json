@@ -1,0 +1,40 @@
+[
+  {
+    "prompt_inputs": {
+      "content": "Climate change mitigation strategies increasingly require integrated approaches that bridge natural science, economic policy, and market mechanisms. Recent studies demonstrate that carbon pricing mechanisms, whether implemented as taxes or cap-and-trade systems, can reduce greenhouse gas emissions by 5-15% while simultaneously creating economic incentives for renewable energy innovation. However, the effectiveness of these policies depends critically on their design, international coordination, and the underlying climate dynamics that determine atmospheric CO2 concentration trajectories. Economists argue that revenue-neutral carbon taxes paired with green infrastructure investments offer superior outcomes compared to regulatory approaches alone, as they harness market forces while funding the transition to low-carbon technologies in sectors ranging from transportation to agriculture."
+    },
+    "solution_criteria": [
+      "Extracts all major topics spanning climate science, economics, and policy domains",
+      "Returns output as a JSON array of strings",
+      "Avoids including minor modifiers or redundant variations of the same topic"
+    ],
+    "task_description": "Extract topics of a passageo ftext from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with a multi-disciplinary passage containing mixed topics (climate science, policy, and economics) to verify accurate topic extraction across domain boundaries"
+  },
+  {
+    "prompt_inputs": {
+      "content": "The phenomenological reduction, as Husserl conceived it, demands a suspension of the natural attitude to access the transcendental ego and its intentional structures. Yet Heidegger's subsequent critique problematizes this very move, arguing that consciousness cannot be divorced from its Being-in-the-world; the subject is always already embedded in a hermeneutic situation where understanding precedes reflection. This tension between transcendental idealism and ontological embeddedness reverberates through contemporary philosophy of mind, particularly in debates concerning the explanatory gap between subjective experience and physical processes. Furthermore, the social constructionist perspective challenges both positions by demonstrating how intersubjective meaning-making and linguistic frameworks constitute what we take to be individual consciousness, suggesting that the very distinction between subject and world may be a product of particular historical and cultural configurations rather than a fundamental metaphysical truth."
+    },
+    "solution_criteria": [
+      "Extracts both explicit concepts (phenomenological reduction, transcendental ego, intentional structures) and implicit themes (subject-world relationship, consciousness, meaning-making)",
+      "Identifies nuanced philosophical tensions and debates mentioned (transcendental idealism vs. ontological embeddedness, explanatory gap)",
+      "Recognizes overarching meta-themes (epistemology, metaphysics, philosophy of mind, social construction of knowledge)",
+      "Returns output as a JSON array of strings with no additional fields or explanations"
+    ],
+    "task_description": "Extract topics of a passageo ftext from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with a dense philosophical article passage containing abstract concepts and implicit themes to assess ability to identify nuanced and non-obvious topics"
+  },
+  {
+    "prompt_inputs": {
+      "content": "The Harlem Renaissance of the 1920s represented a transformative period in African American cultural expression, emerging from the Great Migration as Black intellectuals and artists congregated in New York City. Langston Hughes revolutionized American poetry through vernacular language and jazz rhythms, while Aaron Douglas pioneered Art Deco aesthetics in visual representation of Black identity. This movement coincided with W.E.B. Du Bois's sociological investigations into racial consciousness and Alain Locke's philosophical framework of cultural nationalism, fundamentally challenging prevailing narratives about African American contributions to American modernism and establishing institutional foundations for subsequent civil rights discourse."
+    },
+    "solution_criteria": [
+      "Extracts all major historical periods, movements, and cultural phenomena mentioned (e.g., Harlem Renaissance, Great Migration)",
+      "Identifies key biographical figures and their associated contributions (e.g., Langston Hughes, Aaron Douglas)",
+      "Captures relevant artistic disciplines and intellectual frameworks (e.g., poetry, Art Deco, cultural nationalism)",
+      "Returns output as a JSON array of strings with no additional fields or metadata"
+    ],
+    "task_description": "Extract topics of a passageo ftext from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with a humanities passage containing historical events, biographical references, and cultural movements to evaluate topic extraction from narrative and contextual content"
+  }
+]
