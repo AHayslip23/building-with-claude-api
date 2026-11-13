@@ -2,7 +2,25 @@
 
 All notable changes to this repository are listed here, newest first.
 
-## Unreleased
+## Commit #3: Hybrid RAG, 2026-11-13
+### Added
+- `05-rag-and-agentic-search/05_Hybrid_Rag_Implementation.ipynb`: the multi-index RAG pipeline, which finishes the RAG and Agentic Search section.
+  - `VectorIndex` (Voyage `voyage-3-large` embeddings, cosine or Euclidean distance) and `BM25Index`, combined behind a `SearchIndex` protocol.
+  - A `Retriever` that sends each query to every index, collects the top `k * 5` from each, and merges them with reciprocal rank fusion (`k_rrf = 60`).
+  - Result for "What happened with INC-2023-Q4-011?": Section 2 (Software Engineering) and Section 10 (Cybersecurity) tie at 0.0325 (1/61 + 1/62) because each index ranks them in the opposite order, and Methodology is third at 0.0310.
+
+### Fixed (in the hybrid notebook before committing)
+- **Voyage `RateLimitError`:** the free tier (no payment method) allows 3 requests and 10K tokens per minute. Adding chunks one at a time with `add_document` made one embedding request per chunk and hit the limit. The notebook now calls `retriever.add_documents([...])` once, which embeds every chunk in a single request.
+- `retriever.add_documents(...)` was passed a generator instead of a list. Added the square brackets so it gets a list, which both indexes need (a generator can only be read once).
+- The search cell printed `results` without first creating it with `retriever.search(...)`.
+- `VectorIndex`: fixed the `LIst` typo, `contents.appends` → `append`, the `search(self, query, Any, k)` signature → `query: Any`, `sort(ley=...)` → `key=`, `distance[:k]` → `distances[:k]`, and the `consine_similarity` misspelling.
+- `Retriever.search`: `scored_docs = List[...] = [...]` → `scored_docs: List[...] = [...]`.
+- `BM25Index`: the missing `]` in the `tokenizer` type hint (a SyntaxError), `self.documents = List[...]` → `:`, the `_update_stat_add` / `_update_stats_add` name mismatch, and missing underscores on `_doc_len`, `_doc_freqs`, `_build_index()` and `_avg_doc_len`.
+
+### Changed
+- README: added the hybrid notebook, explained the RRF tie and the Voyage free-tier limits, marked the RAG section complete and added reciprocal rank fusion to the tech list.
+
+## README and changelog update (`b6d0ab1`), 2026-11-12
 ### Added
 - `CHANGELOG.md` (this file).
 
