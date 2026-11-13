@@ -47,10 +47,14 @@ My notebooks and exercises from Anthropic's [**Claude with the Anthropic API**](
 ### 05 · RAG and Agentic Search *(in progress)*
 | Notebook | Lesson |
 |---|---|
-| `01_text_chunking_and_embeddings.ipynb` | Text chunking strategies (by character, sentence and section), text embeddings with Voyage AI, and a vector index |
-| `02_vector_database.ipynb` | The full RAG flow: chunk, embed and store sections in a vector index, then search it |
+| `01_text_chunking_and_embeddings.ipynb` | Text chunking strategies (by character, sentence and section), text embeddings with Voyage AI, and a custom `VectorIndex` |
+| `02_vector_database.ipynb` | The full RAG flow: chunk `report.md` by section, embed each chunk, store it in the vector index and run a semantic query ("What did the software engineering department do last year?") |
+| `03_vector_db.ipynb` | The same pipeline run with an exact-ID query ("What happened with INC-2023-Q4-011?"), showing where embedding search struggles with specific identifiers |
+| `004_bm25.ipynb` | BM25 lexical search: a from-scratch `BM25Index` (tokenizing, IDF, term-frequency scoring and score normalization) searched with the same incident-ID query |
 
-`report.md` is the sample document used for chunking, and `VoyageAI_API_Key_Directions.pdf` covers setting up a Voyage AI key for embeddings.
+`report.md` is the sample document every notebook in this section searches, and `VoyageAI_API_Key_Directions.pdf` covers setting up a Voyage AI key for embeddings.
+
+**What the BM25 notebook shows:** for the incident-ID query, BM25 ranks *Section 2: Software Engineering* above *Section 10: Cybersecurity*. That isn't a bug. Section 2 mentions `INC-2023-Q4-011` three times and Section 10 mentions it twice, and BM25 only counts matching words. Semantic search and lexical search each miss something, which is why the next lesson combines them in a multi-index (hybrid) pipeline.
 
 ## Setup
 
@@ -70,4 +74,7 @@ VOYAGE_API_KEY=...
 Each notebook calls `load_dotenv()`, which finds the `.env` file in the root folder. Then open any notebook with `jupyter lab`.
 
 ## Tech
-Python · Jupyter · Anthropic Python SDK · Voyage AI embeddings
+Python · Jupyter · Anthropic Python SDK · Voyage AI embeddings · BM25
+
+## Changelog
+See [CHANGELOG.md](CHANGELOG.md) for what changed in each commit.
