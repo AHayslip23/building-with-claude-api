@@ -2,7 +2,14 @@
 
 All notable changes to this repository are listed here, newest first.
 
-## Commit #5: Image support, 2026-11-13
+## Commit #6: Fix thinking argument in the images notebook, 2026-11-13
+### Fixed
+- `06-features-of-claude/02_images.ipynb`: renamed the `chat()` argument `thinking_efforts` to `thinking_effort` so it matches the name used in the function body. `chat(..., thinking=True)` no longer raises a `NameError`. This resolves the known issue listed under Commit #5.
+
+### Changed
+- CHANGELOG: added this entry, added the Commit #5 hash and marked its known issue as fixed.
+
+## Commit #5 (`f3a163f`): Image support, 2026-11-13
 ### Added
 - `06-features-of-claude/02_images.ipynb`: the image support lesson.
   - Loads `images/prop7.png`, base64-encodes it, and sends it as an `image` content block together with a five-step wildfire-risk prompt (residence identification, tree overhang, fire risk, defensible space, 1–4 rating).
@@ -11,7 +18,7 @@ All notable changes to this repository are listed here, newest first.
 - `06-features-of-claude/images/prop1.png`–`prop7.png`: the course's seven sample satellite images of properties.
 
 ### Known issues
-- In `chat()`, the argument is named `thinking_efforts` but the body uses `thinking_effort`, so `chat(..., thinking=True)` raises a `NameError`. It hasn't triggered yet because the notebook calls `chat(messages)` without thinking. Fix it by renaming the argument to `thinking_effort`.
+- ~~In `chat()`, the argument is named `thinking_efforts` but the body uses `thinking_effort`, so `chat(..., thinking=True)` raises a `NameError`.~~ Fixed in Commit #6.
 
 ### Changed
 - README: added `02_images.ipynb` to section 06, summarized the fire-risk result, and noted that Haiku 5.5 thinks by default with the thinking text hidden.
