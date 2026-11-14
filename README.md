@@ -65,8 +65,13 @@ My notebooks and exercises from Anthropic's [**Claude with the Anthropic API**](
 | Notebook | Lesson |
 |---|---|
 | `001_thinking_complete.ipynb` | Extended thinking, updated for current models and the current SDK: adaptive thinking (`thinking: {"type": "adaptive", "display": "summarized"}`) controlled by `output_config.effort` instead of a fixed `budget_tokens` |
+| `02_images.ipynb` | Image support: sends a base64-encoded satellite image (`images/prop7.png`) with a step-by-step prompt that assesses wildfire risk from tree overhang and gives a 1–4 Fire Risk Rating |
 
 **What the thinking notebook shows:** with `claude-haiku-5-5` at `"medium"` effort, the prompt "Write up a one paragraph guide to recursion" returned **0 thinking tokens** and only a text block. Adaptive thinking lets the model decide whether to think at all, and a simple prompt doesn't need it. A harder prompt or a higher `effort` (`"high"`, `"xhigh"`, `"max"`) is needed to see a `thinking` block.
+
+**What the images notebook shows:** for `prop7.png`, Claude found the L-shaped main residence in a forest clearing, estimated that roughly 25–30% of the roof is under overhanging branches, noted a continuous canopy and possible fuel ladders, and gave a **Fire Risk Rating of 3 (High Risk)**. It also flagged that the image is low-resolution and shadowed, so the rating should be confirmed with a ground-level inspection. `images/` holds the seven sample property images (`prop1.png`–`prop7.png`).
+
+Even though the call didn't turn thinking on, `claude-haiku-5-5` used **948 thinking tokens** and returned a thinking block with its text left empty. On this model thinking appears to be on by default, and the thinking text is hidden unless you set `display: "summarized"`.
 
 ## Notes on newer models and SDK versions
 The course was recorded against older models and an older `anthropic` SDK. A few course examples need changes to run today:

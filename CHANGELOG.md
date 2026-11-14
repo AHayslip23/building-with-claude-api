@@ -2,7 +2,21 @@
 
 All notable changes to this repository are listed here, newest first.
 
-## Commit #4: Extended thinking, 2026-11-13
+## Commit #5: Image support, 2026-11-13
+### Added
+- `06-features-of-claude/02_images.ipynb`: the image support lesson.
+  - Loads `images/prop7.png`, base64-encodes it, and sends it as an `image` content block together with a five-step wildfire-risk prompt (residence identification, tree overhang, fire risk, defensible space, 1–4 rating).
+  - Model: `claude-haiku-5-5`. Result: Fire Risk Rating **3 (High Risk)**, with about 25–30% roof overhang, a continuous canopy and possible fuel ladders. Claude flagged that the low resolution limits confidence.
+  - Usage: 2,255 input tokens and 1,498 output tokens, including 948 thinking tokens even though `thinking` wasn't turned on.
+- `06-features-of-claude/images/prop1.png`–`prop7.png`: the course's seven sample satellite images of properties.
+
+### Known issues
+- In `chat()`, the argument is named `thinking_efforts` but the body uses `thinking_effort`, so `chat(..., thinking=True)` raises a `NameError`. It hasn't triggered yet because the notebook calls `chat(messages)` without thinking. Fix it by renaming the argument to `thinking_effort`.
+
+### Changed
+- README: added `02_images.ipynb` to section 06, summarized the fire-risk result, and noted that Haiku 5.5 thinks by default with the thinking text hidden.
+
+## Commit #4 (`552fb55`): Extended thinking, 2026-11-13
 ### Added
 - `06-features-of-claude/001_thinking_complete.ipynb`: the extended thinking lesson, which starts section 06 (Features of Claude).
   - Model: `claude-haiku-5-5`.
@@ -17,6 +31,7 @@ All notable changes to this repository are listed here, newest first.
 - `400: "thinking.type.enabled" is not supported for this model`: replaced the course's `{"type": "enabled", "budget_tokens": 1024}` with adaptive thinking plus `output_config.effort`, and replaced the `thinking_budget` argument with `thinking_effort`.
 
 ### Changed
+- `01-accessing-claude-with-the-api/01_making_a_request.ipynb`: only the Python version recorded in the notebook's settings changed (3.12.13 → 3.12.16). No code changed.
 - README: added section 06 with the thinking notebook and its result, added a "Notes on newer models and SDK versions" section (adaptive thinking, the removed `temperature` argument, hyphenated model IDs, `client.messages`) and added extended/adaptive thinking to the tech list.
 
 ## Commit #3 (`e205360`): Hybrid RAG, 2026-11-13
