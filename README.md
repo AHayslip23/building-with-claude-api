@@ -61,6 +61,21 @@ My notebooks and exercises from Anthropic's [**Claude with the Anthropic API**](
 
 **Voyage AI free tier:** without a payment method, Voyage allows 3 requests and 10K tokens per minute. The hybrid notebook adds every chunk with `retriever.add_documents([...])`, which embeds the whole report in **one** request instead of one request per chunk.
 
+### 06 · Features of Claude *(in progress)*
+| Notebook | Lesson |
+|---|---|
+| `001_thinking_complete.ipynb` | Extended thinking, updated for current models and the current SDK: adaptive thinking (`thinking: {"type": "adaptive", "display": "summarized"}`) controlled by `output_config.effort` instead of a fixed `budget_tokens` |
+
+**What the thinking notebook shows:** with `claude-haiku-5-5` at `"medium"` effort, the prompt "Write up a one paragraph guide to recursion" returned **0 thinking tokens** and only a text block. Adaptive thinking lets the model decide whether to think at all, and a simple prompt doesn't need it. A harder prompt or a higher `effort` (`"high"`, `"xhigh"`, `"max"`) is needed to see a `thinking` block.
+
+## Notes on newer models and SDK versions
+The course was recorded against older models and an older `anthropic` SDK. A few course examples need changes to run today:
+
+- **Extended thinking:** `thinking: {"type": "enabled", "budget_tokens": N}` returns a 400 error on Claude Opus 4.7 and later. Use `{"type": "adaptive"}` with `output_config: {"effort": ...}`. Older models such as `claude-haiku-4-5` still accept the budget form.
+- **`temperature`:** the current SDK's `messages.create()` no longer takes a `temperature` argument and raises a `TypeError` if you pass one. Notebooks that set it, like `06_temperature.ipynb` in section 01, need it removed to run on SDK 2.x.
+- **Model IDs** use hyphens, not dots: `claude-opus-5-5`, not `claude-opus-5.5`.
+- **The client attribute is `client.messages`**, not `client.message`.
+
 ## Setup
 
 ```bash
@@ -79,7 +94,7 @@ VOYAGE_API_KEY=...
 Each notebook calls `load_dotenv()`, which finds the `.env` file in the root folder. Then open any notebook with `jupyter lab`.
 
 ## Tech
-Python · Jupyter · Anthropic Python SDK · Voyage AI embeddings · BM25 · Reciprocal rank fusion
+Python · Jupyter · Anthropic Python SDK · Voyage AI embeddings · BM25 · Reciprocal rank fusion · Extended/adaptive thinking
 
 ## Changelog
 See [CHANGELOG.md](CHANGELOG.md) for what changed in each commit.

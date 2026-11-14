@@ -2,7 +2,24 @@
 
 All notable changes to this repository are listed here, newest first.
 
-## Commit #3: Hybrid RAG, 2026-11-13
+## Commit #4: Extended thinking, 2026-11-13
+### Added
+- `06-features-of-claude/001_thinking_complete.ipynb`: the extended thinking lesson, which starts section 06 (Features of Claude).
+  - Model: `claude-haiku-5-5`.
+  - `chat()` helper with a `thinking` switch that sends `thinking: {"type": "adaptive", "display": "summarized"}` and `output_config: {"effort": thinking_effort}` (default `"medium"`).
+  - Result: "Write up a one paragraph guide to recursion" came back with `thinking_tokens=0` and a single text block. Adaptive thinking skipped thinking because the prompt was simple.
+  - Includes the course's redacted-thinking test string (`thinking_test_str`), which isn't used yet.
+
+### Fixed (in the thinking notebook before committing)
+- `AttributeError: 'Anthropic' object has no attribute 'message'`: changed `client.message.create` to `client.messages.create`.
+- Model ID `"claude-opus-5.5"` → hyphenated IDs (`claude-opus-5-5`); the final notebook uses `claude-haiku-5-5`.
+- `TypeError: Messages.create() got an unexpected keyword argument 'temperature'`: the `anthropic` 2.x SDK no longer accepts `temperature`, so it was removed from the request parameters. The `temperature` argument stays in `chat()` so older calls still run.
+- `400: "thinking.type.enabled" is not supported for this model`: replaced the course's `{"type": "enabled", "budget_tokens": 1024}` with adaptive thinking plus `output_config.effort`, and replaced the `thinking_budget` argument with `thinking_effort`.
+
+### Changed
+- README: added section 06 with the thinking notebook and its result, added a "Notes on newer models and SDK versions" section (adaptive thinking, the removed `temperature` argument, hyphenated model IDs, `client.messages`) and added extended/adaptive thinking to the tech list.
+
+## Commit #3 (`e205360`): Hybrid RAG, 2026-11-13
 ### Added
 - `05-rag-and-agentic-search/05_Hybrid_Rag_Implementation.ipynb`: the multi-index RAG pipeline, which finishes the RAG and Agentic Search section.
   - `VectorIndex` (Voyage `voyage-3-large` embeddings, cosine or Euclidean distance) and `BM25Index`, combined behind a `SearchIndex` protocol.
